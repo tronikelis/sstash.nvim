@@ -55,6 +55,7 @@ M.commands = {
         local mkdir = vim.system({ "mkdir", "-p", vim.fs.dirname(final_path) }):wait()
         if mkdir.code ~= 0 then
             print("mkdir failed", mkdir.stderr)
+            return
         end
 
         vim.cmd({ bang = true, cmd = "mksession", args = { final_path } })
