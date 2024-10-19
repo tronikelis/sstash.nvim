@@ -43,8 +43,12 @@ https://github.com/user-attachments/assets/7bd472a2-29f8-49f0-8cef-93362026180a
         return "session.vim"
     end,
 
-    ---calls SStash write on VimLeavePre
-    write_on_leave = true,
+    ---should write be called when leaving,
+    ---setting this to false will not add autocmd
+    ---you might want to return false if current filetype is gitcommit / directory etc...
+    write_on_leave = function()
+        return true
+    end,
 }
 
 ```

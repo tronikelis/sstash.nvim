@@ -16,8 +16,12 @@ M.config = {
         return "session.vim"
     end,
 
-    ---calls SStash write on VimLeavePre
-    write_on_leave = true,
+    ---should write be called when leaving,
+    ---setting this to false will not add autocmd
+    ---you might want to return false if current filetype is gitcommit / directory etc...
+    write_on_leave = function()
+        return true
+    end,
 }
 
 ---@return string?
@@ -87,7 +91,9 @@ function M.setup(config)
     if M.config.write_on_leave then
         vim.api.nvim_create_autocmd("VimLeavePre", {
             callback = function()
-                M.commands.write()
+                if M.config.write_on_leave() then
+                    M.commands.write()
+                end
             end,
         })
     end
