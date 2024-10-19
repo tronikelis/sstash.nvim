@@ -12,6 +12,7 @@ M.config = {
     ---the session file name that will get written
     ---default is session.vim, but you can for example
     ---add the git HEAD sha to the name to scope the sessions
+    ---this is essentially the final filename, thus it can't have special chars like "/"
     get_session_name = function()
         return "session.vim"
     end,

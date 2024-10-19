@@ -2,6 +2,8 @@
 
 S(ession)Stash.nvim
 
+> Cmon I just want to get back to my opened files for this directory
+
 A wrapper around `mksession`
 
 Get back to your previous session only when you need it
@@ -49,6 +51,7 @@ https://github.com/user-attachments/assets/7bd472a2-29f8-49f0-8cef-93362026180a
     ---the session file name that will get written
     ---default is session.vim, but you can for example
     ---add the git HEAD sha to the name to scope the sessions
+    ---this is essentially the final filename, thus it can't have special chars like "/"
     get_session_name = function()
         return "session.vim"
     end,
