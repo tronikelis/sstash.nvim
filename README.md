@@ -1,12 +1,14 @@
 # SStash.nvim
 
+S(ession)Stash.nvim
+
 A wrapper around `mksession`
 
 Get back to your previous session only when you need it
 
 ## How it works
 
-When you leave neovim, a new session gets created with the cwd as the "id"
+When you leave neovim or call `SStash write`, a new session gets created with the cwd as the "id"
 
 Next time you open neovim and run `SStash [source]` the plugin will traverse your cwd parents
 until it finds a session (or doesn't) and then it sources that session, effectively making it just as
