@@ -52,3 +52,14 @@ https://github.com/user-attachments/assets/7bd472a2-29f8-49f0-8cef-93362026180a
 }
 
 ```
+
+## Recipes
+
+### disable saving session on some filetypes
+
+```lua
+write_on_leave = function()
+    local disabled_ft = { gitcommit = true, oil = true }
+    return not disabled_ft[vim.bo.filetype]
+end,
+```
