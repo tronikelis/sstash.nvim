@@ -28,8 +28,6 @@ https://github.com/user-attachments/assets/7bd472a2-29f8-49f0-8cef-93362026180a
 
 ```lua
 {
-    dir = vim.fs.joinpath(vim.fn.stdpath("data"), "/sstash.nvim/"),
-
     ---should return the cwd of nvim
     ---@return string
     get_cwd = function()

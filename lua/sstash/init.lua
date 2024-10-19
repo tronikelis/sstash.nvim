@@ -1,8 +1,8 @@
 local M = {}
 
-M.config = {
-    dir = vim.fs.joinpath(vim.fn.stdpath("data"), "/sstash.nvim/"),
+local DATA_DIR = vim.fs.joinpath(vim.fn.stdpath("data"), "/sstash.nvim/")
 
+M.config = {
     ---should return the cwd of nvim
     ---@return string
     get_cwd = function()
@@ -26,7 +26,7 @@ local function find_session_path()
     local session_name = M.config.get_session_name()
 
     while #current > 1 do
-        local maybe = vim.fs.joinpath(M.config.dir, current, session_name)
+        local maybe = vim.fs.joinpath(DATA_DIR, current, session_name)
 
         if vim.uv.fs_statfs(maybe) then
             return maybe
@@ -47,7 +47,7 @@ M.commands = {
     end,
 
     write = function()
-        local final_path = vim.fs.joinpath(M.config.dir, M.config.get_cwd())
+        local final_path = vim.fs.joinpath(DATA_DIR, M.config.get_cwd())
 
         final_path = vim.fs.dirname(final_path)
         final_path = vim.fs.joinpath(final_path, M.config.get_session_name())
