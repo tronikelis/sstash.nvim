@@ -13,6 +13,7 @@ Get back to your previous session only when you need it
   - [Config](#config)
   - [Recipes](#recipes)
     - [disable saving session on some filetypes](#disable-saving-session-on-some-filetypes)
+    - [Session scoped to git branch](#session-scoped-to-git-branch)
 <!--toc:end-->
 
 ## How it works
@@ -70,5 +71,19 @@ https://github.com/user-attachments/assets/7bd472a2-29f8-49f0-8cef-93362026180a
 write_on_leave = function()
     local disabled_ft = { gitcommit = true, oil = true }
     return not disabled_ft[vim.bo.filetype]
+end,
+```
+
+### Session scoped to git branch
+
+```lua
+get_session_name = function()
+    local git_branch = vim.system({ "git", "branch", "--show-current" }):wait()
+
+    if git_branch.code == 0 then
+        return "gb" .. vim.base64.encode(vim.trim(git_branch.stdout)) .. ".vim"
+    end
+
+    return "session.vim"
 end,
 ```
