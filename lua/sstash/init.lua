@@ -11,7 +11,7 @@ M.config = {
 
     ---the session file name that will get written
     ---default is session.vim, but you can for example
-    ---add the git branch to the name to scope the sessions
+    ---add the git HEAD sha to the name to scope the sessions
     get_session_name = function()
         return "session.vim"
     end,

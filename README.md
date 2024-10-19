@@ -47,7 +47,7 @@ https://github.com/user-attachments/assets/7bd472a2-29f8-49f0-8cef-93362026180a
 
     ---the session file name that will get written
     ---default is session.vim, but you can for example
-    ---add the git branch to the name to scope the sessions
+    ---add the git HEAD sha to the name to scope the sessions
     get_session_name = function()
         return "session.vim"
     end,
