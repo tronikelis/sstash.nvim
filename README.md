@@ -6,6 +6,15 @@ A wrapper around `mksession`
 
 Get back to your previous session only when you need it
 
+
+<!--toc:start-->
+- [SStash.nvim](#sstashnvim)
+  - [How it works](#how-it-works)
+  - [Config](#config)
+  - [Recipes](#recipes)
+    - [disable saving session on some filetypes](#disable-saving-session-on-some-filetypes)
+<!--toc:end-->
+
 ## How it works
 
 When you leave neovim or call `SStash write`, a new session gets created with the cwd as the "id"
