@@ -14,8 +14,9 @@ Get back to your previous session only when you need it
   - [How it works](#how-it-works)
   - [Config](#config)
   - [Recipes](#recipes)
-    - [disable saving session on some filetypes](#disable-saving-session-on-some-filetypes)
+    - [Disable saving session on some filetypes](#disable-saving-session-on-some-filetypes)
     - [Session scoped to git branch](#session-scoped-to-git-branch)
+    - [Git cwd with fallback to current](#git-cwd-with-fallback-to-current)
 <!--toc:end-->
 
 ## How it works
@@ -68,7 +69,7 @@ https://github.com/user-attachments/assets/7bd472a2-29f8-49f0-8cef-93362026180a
 
 ## Recipes
 
-### disable saving session on some filetypes
+### Disable saving session on some filetypes
 
 ```lua
 write_on_leave = function()
@@ -88,5 +89,13 @@ get_session_name = function()
     end
 
     return "session.vim"
+end,
+```
+
+### Git cwd with fallback to current
+
+```lua
+get_cwd = function()
+    return vim.fs.root(0, ".git") or vim.fn.getcwd()
 end,
 ```
