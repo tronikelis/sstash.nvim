@@ -53,13 +53,9 @@ M.commands = {
 
     write = function()
         local data_dir = vim.fs.joinpath(DATA_DIR, M.config.get_cwd())
-        local session = vim.fs.joinpath(data_dir, M.config.get_session_name())
+        vim.fn.mkdir(data_dir, "p")
 
-        local mkdir = vim.system({ "mkdir", "-p", data_dir }):wait()
-        if mkdir.code ~= 0 then
-            print("mkdir failed", mkdir.stderr)
-            return
-        end
+        local session = vim.fs.joinpath(data_dir, M.config.get_session_name())
 
         vim.cmd({ bang = true, cmd = "mksession", args = { session } })
     end,
