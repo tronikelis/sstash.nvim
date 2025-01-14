@@ -23,6 +23,16 @@ M.config = {
     write_on_leave = function()
         return true
     end,
+
+    ---function that actually writes the session
+    write = function(filename)
+        vim.cmd({ bang = true, cmd = "mksession", args = { filename } })
+    end,
+
+    ---function that sources the session
+    source = function(filename)
+        vim.cmd({ cmd = "source", args = { filename } })
+    end,
 }
 
 ---@return string?
@@ -48,16 +58,15 @@ M.commands = {
             return
         end
 
-        vim.cmd({ cmd = "source", args = { path } })
+        M.config.source(path)
     end,
 
     write = function()
         local data_dir = vim.fs.joinpath(DATA_DIR, M.config.get_cwd())
         vim.fn.mkdir(data_dir, "p")
 
-        local session = vim.fs.joinpath(data_dir, M.config.get_session_name())
-
-        vim.cmd({ bang = true, cmd = "mksession", args = { session } })
+        local filename = vim.fs.joinpath(data_dir, M.config.get_session_name())
+        M.config.write(filename)
     end,
 }
 
@@ -77,9 +86,12 @@ function M.setup(config)
         print("unknown command")
     end, {
         nargs = "?",
-        complete = function()
-            local candidates = vim.tbl_keys(M.commands)
-            return candidates
+        complete = function(query)
+            return vim.iter(vim.tbl_keys(M.commands))
+                :filter(function(x)
+                    return x:sub(1, #query) == query
+                end)
+                :totable()
         end,
     })
 

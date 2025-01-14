@@ -63,6 +63,16 @@ https://github.com/user-attachments/assets/7bd472a2-29f8-49f0-8cef-93362026180a
     write_on_leave = function()
         return true
     end,
+
+    ---function that actually writes the session
+    write = function(filename)
+        vim.cmd({ bang = true, cmd = "mksession", args = { filename } })
+    end,
+
+    ---function that sources the session
+    source = function(filename)
+        vim.cmd({ cmd = "source", args = { filename } })
+    end,
 }
 
 ```
